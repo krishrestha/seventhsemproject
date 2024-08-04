@@ -159,7 +159,7 @@ class Screen1 extends StatelessWidget{
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: (MediaQuery.of(context).size.height-50-25)/(4*240),
+                    childAspectRatio: (MediaQuery.of(context).size.height-20-25)/(4*240),
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                   ),
@@ -174,7 +174,7 @@ class Screen1 extends StatelessWidget{
                             ));
                       },
                       child:Container(
-                        padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+                        padding: EdgeInsets.symmetric(vertical: 40,horizontal: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Color(0xFFF5F3FF),
