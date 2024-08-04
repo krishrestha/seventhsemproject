@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:seventhsemproject/Screens/course_screen.dart';
-import 'package:seventhsemproject/Screens/signupScreen.dart';
 class Screen1 extends StatelessWidget{
 
+  final User? user = FirebaseAuth.instance.currentUser;
   //Creating static data in lists
   List catNames =[
     "Category",
@@ -44,6 +43,7 @@ class Screen1 extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: ListView(
           children: [
@@ -57,7 +57,7 @@ class Screen1 extends StatelessWidget{
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 3,bottom: 15),
-                    child: Text("Hi Programmer",style:TextStyle(
+                    child: Text('Hi, ${user?.displayName ?? 'No Display Name'}',style:TextStyle(
                       fontSize: 25,fontWeight: FontWeight.w600,
                       letterSpacing:1,
                       wordSpacing: 2,
