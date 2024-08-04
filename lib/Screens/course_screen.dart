@@ -24,16 +24,6 @@ class _CourseScreenState extends State<CourseScreen>{
             letterSpacing: 1,
           ),
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Icon(
-              Icons.notifications,
-              size: 28,
-              color: Color(0xFF674AEF),
-            ),
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
@@ -66,7 +56,7 @@ class _CourseScreenState extends State<CourseScreen>{
               ),
             ),
             SizedBox(height: 15),
-            Text("${widget.img}Complete Course",
+            Text("${widget.img} Complete Course",
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w600,
