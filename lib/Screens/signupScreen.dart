@@ -1,14 +1,30 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:seventhsemproject/Screens/homeScreen.dart';
-import 'package:seventhsemproject/Screens/signupScreen.dart';
+import 'package:seventhsemproject/Screens/loginScreen.dart';
 import 'authService.dart';
 
-class loginScreen extends StatelessWidget {
+class signupScreen extends StatelessWidget {
   final userForm = GlobalKey<FormState>();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
 
+  Future<void> createAccount(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email.text,
+        password: password.text,
+      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => homeScreen()),(route){return false;}
+      );
+    } catch (e) {
+      SnackBar messageSnackbar = SnackBar(content: Text(e.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(messageSnackbar);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +41,7 @@ class loginScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: 70),
                   Text(
-                    'Log In',
+                    'Sign Up',
                     style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                   ), //login lekhya wala
                   SizedBox(height: 20),
@@ -82,14 +98,13 @@ class loginScreen extends StatelessWidget {
                     width: 300,
                     height: 48,
                     child: ElevatedButton(
-                      onPressed: (){
-                        Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => homeScreen()),(route){return false;}
-                        );
+                      onPressed: () {
+                        if (userForm.currentState!.validate()) {
+                          createAccount(context);
+                        }
                       },
                       child: Text(
-                        'Log In',
+                        'Create Account',
                         style: TextStyle(
                           fontSize: 24,
                           color: Colors.black,
@@ -131,12 +146,12 @@ class loginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don't have an account? ",
+                        "Already have an account? ",
                         style: TextStyle(fontSize: 16),
                       ),
                       InkWell(
                         child: Text(
-                          'Sign Up',
+                          'Log in',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -144,10 +159,8 @@ class loginScreen extends StatelessWidget {
                         ),
                         onTap: () {
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => signupScreen(),
-                            ),
+                              context,
+                              MaterialPageRoute(builder: (context) => loginScreen()),
                           );
                         },
                       ),
